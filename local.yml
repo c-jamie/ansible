@@ -1,6 +1,6 @@
 - hosts: localhost
-  # vars:
-  #   personal: "{{ lookup('env', 'HOME') }}/personal"
+  vars:
+    home: "{{ lookup('env', 'HOME') }}/personal"
   pre_tasks:
   - name: Update Apt
     become: true
