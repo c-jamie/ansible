@@ -5,7 +5,6 @@
         url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         dest: /tmp/install-miniconda.sh
     - name: Create conda folder
-      become: True
       file:
         path: /opt/miniconda3
         state: directory
