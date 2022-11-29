@@ -32,15 +32,15 @@
         recurse: yes
     - name: update conda 
       become: True
-      shell: conda update -y -q conda
+      shell: "{{ m3 }}/conda update -y -q conda"
     - name: set autoupdate
       become: True
-      shell: conda config --set auto_update_conda false
+      shell: "{{ m3 }}/conda config --set auto_update_conda false"
     - name: set channels
-      shell: conda config --set show_channel_urls True
+      shell: "{{ m3 }}/conda config --set show_channel_urls True"
     - name: add continiuum.io
-      shell: conda config --add channels https://repo.continuum.io/pkgs/free
+      shell: "{{ m3 }}/conda config --add channels https://repo.continuum.io/pkgs/free"
     - name: set conda forge
-      shell: conda config --add channels conda-forge
+      shell: "{{ m3 }}/conda config --add channels conda-forge"
     - name: init all
-      shell: conda init --all --verbose
+      shell: "{{ m3 }}/conda init --all --verbose"

@@ -1,7 +1,8 @@
 - hosts: localhost
   vars:
-    home: "{{ lookup('env', 'HOME') }}/personal"
+    home: "{{ lookup('env', 'HOME') }}"
     user: "{{ lookup('env', 'USER')}}"
+    m3: "{{ user }}/miniconda3/bin"
 
   pre_tasks:
   - name: Update Apt
