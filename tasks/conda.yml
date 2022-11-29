@@ -10,6 +10,7 @@
         state: directory
         recurse: yes
     - name: Run the installer
+      become: True
       shell: /tmp/install-miniconda.sh -b -u -p "{{ home }}/miniconda3"
     - name: Remove the installer
       file:
