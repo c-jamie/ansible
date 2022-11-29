@@ -4,7 +4,6 @@
       get_url:
         url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         dest: /tmp/install-miniconda.sh
-        checksum: md5:a946ea1d0c4a642ddf0c3a26a18bb16d
         mode: 0550
     - name: Create conda folder
       become: True
