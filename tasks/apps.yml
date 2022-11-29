@@ -1,0 +1,13 @@
+- name: Install System Packages 1 (git)
+  become: true
+  apt:
+    name: ["git"]
+  tags:
+    - install
+
+- name: Productivity
+  become: true
+  apt:
+    name: [ "tmux", "fzf", "ripgrep" ]
+  tags:
+    - install
