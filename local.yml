@@ -13,5 +13,5 @@
       - core
   
   tasks:
-    - include: tasks/defaults.yml
+    - include: tasks/apps.yml
     - include: tasks/conda.yml
