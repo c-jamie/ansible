@@ -6,7 +6,7 @@
         dest: /tmp/install-miniconda.sh
     - name: Create conda folder
       file:
-        path: {{ home }}/miniconda3
+        path: "{{ home }}/miniconda3"
         state: directory
         recurse: yes
     - name: Run the installer
@@ -21,13 +21,13 @@
     - name: conda - read permission for all
       become: True
       file:
-        path: {{ home }}/miniconda3
+        path: "{{ home }}/miniconda3"
         mode: +r
         recurse: yes
     - name: conda - execution permission for all
       become: True
       file:
-        path: {{home}}/miniconda3/bin
+        path: "{{home}}/miniconda3/bin"
         mode: +x
         recurse: yes
     - name: update conda 
