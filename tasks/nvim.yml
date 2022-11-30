@@ -7,7 +7,7 @@
         mode: a+x
     - name: Create NVM config folder
       file:
-        path: "{{ home }}/.config/nvm"
+        path: "{{ home }}/.config/nvim"
         state: directory
         recurse: yes
     - name: Create NVM folder
