@@ -15,7 +15,7 @@
     - name: C++
       become: true
       apt:
-        name: [ "make", "gcc"]
+        name: [ "make", "gcc", "g++"]
       tags:
         - install
   tags:
