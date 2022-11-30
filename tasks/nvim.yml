@@ -29,5 +29,7 @@
         url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
         dest: '{{ home }}/.config/nvim/init.lua'
         mode: '0700'
+    - name: Hack to make fzf Run
+      shell: 'cd {{ home }}/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim && make' 
   tags:
     - nvm
