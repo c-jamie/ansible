@@ -11,17 +11,14 @@
         state: directory
         recurse: yes
     - name: Run the installer
-      become: True
       shell: /tmp/install-miniconda.sh -b -u -p '{{ home }}/miniconda3'
     - name: Remove the installer
       file:
         state: absent
         path: /tmp/install-miniconda.sh
     - name: Add miniconda bin to path
-      become: True
       shell: echo 'export PATH={{ home }}/miniconda3/bin:$PATH' >> '{{ home }}/.profile'
     - name: conda - read permission for all
-      become: True
       file:
         path: "{{ home }}/miniconda3"
         mode: +r
@@ -33,10 +30,8 @@
         mode: +x
         recurse: yes
     - name: update conda 
-      become: True
       shell: "{{ m3 }}/conda update -y -q conda"
     - name: set autoupdate
-      become: True
       shell: "{{ m3 }}/conda config --set auto_update_conda false"
     - name: set channels
       shell: "{{ m3 }}/conda config --set show_channel_urls True"
