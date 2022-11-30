@@ -24,3 +24,5 @@
         url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
         dest: '{{ home }}/.config/nvim'
         mode: '0700'
+  tags:
+    - nvm
