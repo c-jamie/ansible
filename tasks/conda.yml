@@ -4,6 +4,7 @@
       get_url:
         url: https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
         dest: /tmp/install-miniconda.sh
+        mode: a+x
     - name: Create conda folder
       file:
         path: "{{ home }}/miniconda3"
@@ -11,14 +12,14 @@
         recurse: yes
     - name: Run the installer
       become: True
-      shell: /tmp/install-miniconda.sh -b -u -p "{{ home }}/miniconda3"
+      shell: /tmp/install-miniconda.sh -b -u -p '{{ home }}/miniconda3'
     - name: Remove the installer
       file:
         state: absent
         path: /tmp/install-miniconda.sh
     - name: Add miniconda bin to path
       become: True
-      shell: echo 'export PATH={{ home }}/miniconda3/bin:$PATH' >> {{ home }}/.profile
+      shell: echo 'export PATH={{ home }}/miniconda3/bin:$PATH' >> '{{ home }}/.profile'
     - name: conda - read permission for all
       become: True
       file:
