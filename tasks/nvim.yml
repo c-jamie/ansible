@@ -22,7 +22,7 @@
     - name: Add init
       get_url:
         url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-        dest: '{{ home }}/.config/nvim'
+        dest: '{{ home }}/.config/nvim/init.lua'
         mode: '0700'
   tags:
     - nvm
