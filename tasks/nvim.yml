@@ -5,6 +5,11 @@
         url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
         dest: /tmp/nvm.tar.gz
         mode: a+x
+    - name: Create NVM config folder
+      file:
+        path: "{{ home }}/.config/nvm"
+        state: directory
+        recurse: yes
     - name: Create NVM folder
       file:
         path: "{{ tools }}/nvm"
