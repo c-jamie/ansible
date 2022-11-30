@@ -14,13 +14,13 @@
       shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ tools }}/nvm'
     - name: Add to path
       shell: echo 'export PATH='{{ tools }}/nvm/bin:$PATH' >> '{{ home }}/.profile'
-    - name: Install Packer
-      git: 
-        repo: https://github.com/wbthomason/packer.nvim
-        dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
-        dept: 1
-    - name: Add init
-      get_url:
-        url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-        dest: '{{ home }}/.config/nvim'
-        mode: '0700'
+    # - name: Install Packer
+    #   git: 
+    #     repo: https://github.com/wbthomason/packer.nvim
+    #     dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+    #     dept: 1
+    # - name: Add init
+    #   get_url:
+    #     url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+    #     dest: '{{ home }}/.config/nvim'
+    #     mode: '0700'
