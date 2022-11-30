@@ -2,7 +2,7 @@
   vars:
     home: "{{ lookup('env', 'HOME') }}"
     user: "{{ lookup('env', 'USER') }}"
-    m3: "{{ user }}/miniconda3/bin"
+    m3: "{{ home }}/miniconda3/bin"
 
   pre_tasks:
   - name: Update Apt
