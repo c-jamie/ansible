@@ -2,7 +2,7 @@
   block:
     - name: Download NVM
       get_url:
-        url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+        url: https://github.com/neovim/neovim/releases/download/stable/nvim-macos.tar.gz
         dest: /tmp/nvm.tar.gz
         mode: a+x
     - name: Create NVM config folder
@@ -17,8 +17,10 @@
         recurse: yes
     - name: Extract NVM
       shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ tools }}/nvm'
-    - name: Add to path
+    - name: Add to path BASH
       shell: echo export PATH='{{ tools }}/nvm/bin:$PATH' >> '{{ home }}/.profile'
+    - name: Add to path FISH
+      shell: fish -c "fish_add_path {{ tools }}/nvm/bin"
     - name: Install Packer
       git: 
         repo: https://github.com/wbthomason/packer.nvim
@@ -30,4 +32,4 @@
         dest: '{{ home }}/.config/nvim/init.lua'
         mode: '0700'
   tags:
-    - nvm
+    - nvm-osx
