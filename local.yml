@@ -21,3 +21,4 @@
     - include: tasks/apps.yml
     - include: tasks/conda.yml
     - include: tasks/nvim.yml
+    - include: tasks/nvim-osx.yml

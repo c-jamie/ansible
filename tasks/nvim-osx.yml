@@ -1,4 +1,4 @@
-- name: Install NVM
+- name: Install NVM OSX
   block:
     - name: Download NVM
       get_url:
