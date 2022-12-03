@@ -32,4 +32,4 @@
         dest: '{{ home }}/.config/nvim/init.lua'
         mode: '0700'
   tags:
-    - nvm-osx
+    - nvmosx
