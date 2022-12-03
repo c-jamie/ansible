@@ -2,6 +2,8 @@
   block:
     - name: Extract NVM
       shell: brew install neovim
+    - name: Install TreeSitter
+      shell: brew install --HEAD tree-sitter
     - name: Install Packer
       git: 
         repo: https://github.com/wbthomason/packer.nvim
