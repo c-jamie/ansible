@@ -25,8 +25,6 @@
       shell: "mv /tmp/nvim.appimage {{ neovim_install_dir }}/nvim"
       args:
         creates: "{{ neovim_install_dir }}/nvim"
-        creates_dest_dir: yes
-
     - name: Extract NeoVim AppImage
       shell: "{{ neovim_install_dir }}/nvim nvim.appimage --appimage-extract"
     - name: Set execute permissions on NeoVim AppImage
