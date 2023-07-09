@@ -9,7 +9,6 @@
   tasks:
     - name: Get latest NeoVim release
       community.general.github_release:
-        owner: "{{ github_repo_owner }}"
         repo: "{{ github_repo_name }}"
         action: latest_release 
         user: "{{ github_repo_owner }}"
