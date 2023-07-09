@@ -11,6 +11,8 @@
       community.general.github_release:
         owner: "{{ github_repo_owner }}"
         repo: "{{ github_repo_name }}"
+        action: latest_release 
+        user: "{{ github_repo_owner }}"
       register: latest_release
     - name: Download NeoVim AppImage
       get_url:
