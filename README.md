@@ -2,6 +2,8 @@
 
 ```
 ansible-pull -U https://github.com/c-jamie/ansible.git --ask-become-pass
+
+ansible-pull -U https://github.com/c-jamie/ansible.git --ask-become-pass --tags nvm
 ```
 ## fzf needs this on linux
 
