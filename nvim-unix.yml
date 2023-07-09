@@ -21,6 +21,10 @@
         url: "{{ download_url }}"
         dest: "/tmp/nvim.appimage"
         mode: 0755   
+    - name: Create destination directory
+      file:
+        path: "{{ neovim_install_dir }}/nvim"
+        state: directory
     - name: Move NeoVim AppImage to install directory
       shell: "mv /tmp/nvim.appimage {{ neovim_install_dir }}/nvim"
       args:
