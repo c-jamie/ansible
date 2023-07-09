@@ -1,0 +1,44 @@
+- name: Download and Install NeoVim
+  hosts: localhost
+  gather_facts: false
+  vars_file: vars.yml
+
+  tasks:
+    - name: Get latest NeoVim release
+      community.general.github_release:
+        owner: "{{ github_repo_owner }}"
+        repo: "{{ github_repo_name }}"
+      register: latest_release
+    - name: Download NeoVim AppImage
+      get_url:
+        url: "{{ latest_release.assets[0].browser_download_url }}"
+        dest: "/tmp/nvim.appimage"
+        mode: 0755
+    - name: Move NeoVim AppImage to install directory
+      shell: "mv /tmp/nvim.appimage {{ neovim_install_dir }}/nvim"
+      args:
+        removes: "{{ neovim_install_dir }}/nvim"
+    - name: Extract NeoVim AppImage
+      shell: " {{ neovim_install_dir }}/nvim nvim.appimage --appimage-extract"
+      args:
+        removes: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
+    - name: Set execute permissions on NeoVim AppImage
+      file:
+        path: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
+        mode: 0755
+    - name: Create symlink to neovim executable
+      file:
+        src: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
+        dest: "/usr/local/bin/nvim"
+        state: link
+        force: true
+    - name: Install Packer
+      git:
+        repo: https://github.com/wbthomason/packer.nvim
+        dest: "{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim"
+        depth: 1
+    - name: Add init
+      get_url:
+        url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+        dest: "{{ home }}/.config/nvim/init.lua"
+        mode: "0700"

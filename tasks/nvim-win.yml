@@ -1,0 +1,29 @@
+- name: Install NVM OSX
+  block:
+    - name: Download NVM
+      get_url:
+        url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+        dest: '{{ win_temp }}nvm.tar.gz'
+        mode: a+x
+    - name: Create NVM config folder
+      file:
+        path: "{{ home }}/.config/nvim"
+        state: directory
+        recurse: yes
+    - name: Create NVM folder
+      file:
+        path: "{{ tools }}/nvm"
+        state: directory
+        recurse: yes
+    - name: Install Packer
+      git: 
+        repo: https://github.com/wbthomason/packer.nvim
+        dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+        depth: 1
+    - name: Add init
+      get_url:
+        url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+        dest: '{{ home }}/.config/nvim/init.lua'
+        mode: '0700'
+  tags:
+    - nvmosx

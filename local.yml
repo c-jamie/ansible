@@ -1,10 +1,4 @@
 - hosts: localhost
-  vars:
-    home: "{{ lookup('env', 'HOME') }}"
-    user: "{{ lookup('env', 'USER') }}"
-    m3: "{{ home }}/miniconda3/bin"
-    tools: "{{ home }}/tools"
-    nvmconfig: "{{ home }}/.config/nvm"
 
   pre_tasks:
   - name: Update Apt
