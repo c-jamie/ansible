@@ -1,7 +1,7 @@
 - name: Download and Install NeoVim
-  hosts: localhost
+  hosts: all
   gather_facts: false
-  vars_file: vars.yml
+  vars_files: vars.yml
 
   tasks:
     - name: Get latest NeoVim release
