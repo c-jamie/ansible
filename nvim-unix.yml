@@ -26,9 +26,7 @@
       args:
         removes: "{{ neovim_install_dir }}/nvim"
     - name: Extract NeoVim AppImage
-      shell: " {{ neovim_install_dir }}/nvim nvim.appimage --appimage-extract"
-      args:
-        removes: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
+      shell: "{{ neovim_install_dir }}/nvim nvim.appimage --appimage-extract"
     - name: Set execute permissions on NeoVim AppImage
       file:
         path: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
