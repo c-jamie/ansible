@@ -23,6 +23,7 @@
         mode: 0755   
     - name: Create destination directory
       file:
+        become: true
         path: "{{ neovim_install_dir }}/nvim"
         state: directory
     - name: Move NeoVim AppImage to install directory
