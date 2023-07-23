@@ -21,13 +21,13 @@
             recurse: yes
         - name: Create NVM folder
           file:
-            path: "{{ tools }}/nvm"
+            path: "{{ neovim_install_dir }}/nvim"
             state: directory
             recurse: yes
         - name: Extract NVM
-          shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ tools }}/nvm'
+          shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ neovim_install_dir }}/nvim'
         - name: Add to path
-          shell: echo export PATH='{{ tools }}/nvm/bin:$PATH' >> '{{ home }}/.profile'
+          shell: echo export PATH='{{ neovim_install_dir }}/nvim/bin:$PATH' >> '{{ home }}/.profile'
         - name: Install Packer
           git: 
             repo: https://github.com/wbthomason/packer.nvim
