@@ -7,45 +7,34 @@
   vars_files: vars.yml
 
   tasks:
-    - name: Get latest NeoVim release
-      uri:
-        url: "https://api.github.com/repos/{{ github_repo_owner }}/{{ github_repo_name }}/releases/latest"
-        return_content: yes
-        validate_certs: no
-      register: latest_release
-    - name: Extract download URL from release response
-      set_fact:
-        download_url: "{{ latest_release.json.assets[0].browser_download_url }}"
-    - name: Download NeoVim AppImage
-      get_url:
-        url: "{{ download_url }}"
-        dest: "/tmp/nvim.appimage"
-        mode: 0755   
-    - name: Create destination directory
-      file:
-        path: "{{ neovim_install_dir }}/nvim"
-        state: directory
-    - name: Move NeoVim AppImage to install directory
-      shell: "mv /tmp/nvim.appimage {{ neovim_install_dir }}/nvim"
-    - name: Extract NeoVim AppImage
-      shell: "{{ neovim_install_dir }}/nvim/nvim.appimage --appimage-extract"
-    - name: Set execute permissions on NeoVim AppImage
-      file:
-        path: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
-        mode: 0755
-    - name: Create symlink to neovim executable
-      file:
-        src: "{{ neovim_install_dir }}/nvim/squashfs-root/usr/bin/nvim"
-        dest: "/usr/local/bin/nvim"
-        state: link
-        force: true
-    - name: Install Packer
-      git:
-        repo: https://github.com/wbthomason/packer.nvim
-        dest: "{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim"
-        depth: 1
-    - name: Add init
-      get_url:
-        url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-        dest: "{{ home }}/.config/nvim/init.lua"
-        mode: "0700"
+    - name: Install NVM
+      block:
+        - name: Download NVM
+          get_url:
+            url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+            dest: /tmp/nvm.tar.gz
+            mode: a+x
+        - name: Create NVM config folder
+          file:
+            path: "{{ home }}/.config/nvim"
+            state: directory
+            recurse: yes
+        - name: Create NVM folder
+          file:
+            path: "{{ tools }}/nvm"
+            state: directory
+            recurse: yes
+        - name: Extract NVM
+          shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ tools }}/nvm'
+        - name: Add to path
+          shell: echo export PATH='{{ tools }}/nvm/bin:$PATH' >> '{{ home }}/.profile'
+        - name: Install Packer
+          git: 
+            repo: https://github.com/wbthomason/packer.nvim
+            dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+            depth: 1
+        - name: Add init
+          get_url:
+            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+            dest: '{{ home }}/.config/nvim/init.lua'
+            mode: '0700'
