@@ -15,12 +15,12 @@
       register: latest_release
     - name: Extract download URL from release response
       set_fact:
-        download_url: "{{ latest_release.json.assets[0].browser_download_url }}"
+        download_url: "{{ latest_release.json.assets | selectattr('name', 'search', '.appimage$') | first | default({}).browser_download_url }}"
     - name: Download NeoVim AppImage
       get_url:
         url: "{{ download_url }}"
         dest: "/tmp/nvim.appimage"
-        mode: 0755   
+        mode: a+x
     - name: Create destination directory
       file:
         path: "{{ neovim_install_dir }}/nvim"
