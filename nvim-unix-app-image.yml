@@ -15,7 +15,7 @@
       register: latest_release
     - name: Extract download URL from release response
       set_fact:
-        download_url: "{{ latest_release.json.assets | selectattr('name', 'search', '.appimage$') | first | default({}).browser_download_url }}"
+        download_url: "{{ latest_release.json.assets | selectattr('name', 'match', '.*\\.appimage$') | map(attribute='browser_download_url') | first }}"
     - name: Download NeoVim AppImage
       get_url:
         url: "{{ download_url }}"
