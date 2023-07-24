@@ -30,7 +30,7 @@
     - name: Set execute permissions on NeoVim AppImage
       file:
         path: "{{ neovim_install_dir }}/nvim/nvim.appimage"
-        mode: 0755
+        mode: a+x
     - name: Extract NeoVim AppImage
       shell: "{{ neovim_install_dir }}/nvim/nvim.appimage --appimage-extract"
     - name: Set execute permissions on NeoVim AppImage
