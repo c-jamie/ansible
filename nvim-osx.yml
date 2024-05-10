@@ -7,34 +7,23 @@
   vars_files: vars.yml
 
   tasks:
-    - name: Install NVM
+    - name: Install NVM OSX
       block:
-        - name: Download NVM
-          get_url:
-            url: https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-            dest: /tmp/nvm.tar.gz
-            mode: a+x
-        - name: Create NVM config folder
-          file:
-            path: "{{ unix_home }}/.config/nvim"
-            state: directory
-            recurse: yes
-        - name: Create NVM folder
-          file:
-            path: "{{ neovim_install_dir }}/nvim"
-            state: directory
-            recurse: yes
         - name: Extract NVM
-          shell: tar zxvf /tmp/nvm.tar.gz --strip-components 1 -C '{{ neovim_install_dir }}/nvim'
-        - name: Add to path
-          shell: echo export PATH='{{ neovim_install_dir }}/nvim/bin:$PATH' >> '{{ unix_home }}/.profile'
+          shell: brew install neovim
+        - name: Install ripgrep
+          shell: brew install ripgrep
+        - name: Install fzf
+          shell: brew install fzf
+        - name: Install TreeSitter
+          shell: brew install --HEAD tree-sitter
         - name: Install Packer
           git: 
             repo: https://github.com/wbthomason/packer.nvim
-            dest: '{{ unix_home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+            dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
             depth: 1
         - name: Add init
           get_url:
             url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-            dest: '{{ unix_home }}/.config/nvim/init.lua'
+            dest: '{{ home }}/.config/nvim/init.lua'
             mode: '0700'
