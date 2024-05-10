@@ -20,10 +20,10 @@
         - name: Install Packer
           git: 
             repo: https://github.com/wbthomason/packer.nvim
-            dest: '{{ home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
+            dest: '{{ unix_home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
             depth: 1
         - name: Add init
           get_url:
             url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-            dest: '{{ home }}/.config/nvim/init.lua'
+            dest: '{{ unix_home }}/.config/nvim/init.lua'
             mode: '0700'
