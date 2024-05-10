@@ -22,6 +22,11 @@
             repo: https://github.com/wbthomason/packer.nvim
             dest: '{{ unix_home }}/.local/share/nvim/site/pack/packer/opt/packer.nvim'
             depth: 1
+        - name: Ensure directory exists
+          ansible.builtin.file:
+            path: '{{ unix_home }}/.config/nvim'
+            state: directory
+            mode: '0755'  # Sets the permissions of the directory
         - name: Add init
           get_url:
             url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
