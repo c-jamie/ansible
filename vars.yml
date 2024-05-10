@@ -1,6 +1,6 @@
 unix_home: "{{ lookup('env', 'HOME') }}"
 unix_user: "{{ lookup('env', 'USER') }}"
-m3: "{{ unix_home }}/miniconda3/bin"
+m3: "{{ unix_home }}/mambaforge/bin"
 tools: "{{ unix_home }}/tools"
 nvmconfig: "{{ unix_home }}/.config/nvm"
 win_temp: "{{ lookup('env', 'Temp') }}"
