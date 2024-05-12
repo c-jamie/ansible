@@ -1,1 +1,32 @@
+- name: Load User Settings for VS Code
+  hosts: 
+    - all
+    - "*"
+    - localhost
+  gather_facts: true
+  vars_files: vars.yml
+
+  tasks:
+    - name: Set variable based on specific OS types
+      set_fact:
+        vs_code_user_home: >
+          {% if ansible_os_family == 'Darwin' %}
+            '{{ unix_home }}'
+          {% elif ansible_os_family == 'Windows' %}
+            '{{ unix_home }}'
+          {% else %}
+            '{{ unix_home }}'
+          {% endif %}
+    - name: Install NVM OSX
+      block:
+        - name: Add Settings
+          get_url:
+            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+            dest: '{{ vs_code_user_home }}/settings.json'
+            mode: '0700'
+        - name: Add Keybindings
+          get_url:
+            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+            dest: '{{ vs_code_user_home }}/keybindings.json'
+            mode: '0700'
 
