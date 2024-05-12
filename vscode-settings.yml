@@ -11,22 +11,21 @@
       set_fact:
         vs_code_user_home: >
           {% if ansible_os_family == 'Darwin' %}
-            '{{ unix_home }}'
+            '{{ vs_code_user_home_osx }}'
           {% elif ansible_os_family == 'Windows' %}
-            '{{ unix_home }}'
+            '{{ vs_code_user_home_win }}'
           {% else %}
-            '{{ unix_home }}'
+            '{{ vs_code_user_home_unix }}'
           {% endif %}
-    - name: Install NVM OSX
+    - name: Load the settings
       block:
         - name: Add Settings
           get_url:
-            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
+            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/vscode/settings.json
             dest: '{{ vs_code_user_home }}/settings.json'
             mode: '0700'
         - name: Add Keybindings
           get_url:
-            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/init.lua
-            dest: '{{ vs_code_user_home }}/keybindings.json'
+            url: https://raw.githubusercontent.com/c-jamie/dev-toolchain/master/dotfiles/vscode/keybindings.json
             mode: '0700'
 
